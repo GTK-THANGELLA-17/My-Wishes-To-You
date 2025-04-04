@@ -81,20 +81,25 @@ export default function CelebrationScreen({
   const { toast } = useToast();
 
   const defaultMediaItems = gender === 'female' ? [
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1557992260-ec58e38d363c?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'video' as const, src: '/H B 5.mp4', poster: '/HB 23' },
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1585399099129-bc9a43dfc250?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'video' as const, src: '/HB 28.mp4', poster: '/H B 5.jpg'},
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1616461046183-f01aa1fe8bc4?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=2070&auto=format&fit=crop' },
+    { type: 'image' as const, src: '/Happy Birthday.jpeg' },
+    { type: 'video' as const, src: '/HB 15.mp4'},
+    { type: 'video' as const, src: '/HB 17.mp4'},
+    { type: 'video' as const, src: '/HB 9.mp4'}, 
+    { type: 'video' as const, src: '/ME.mp4'}, 
+    { type: 'video' as const, src: '/HB 19.mp4'},
+    { type: 'video' as const, src: '/HB 28.mp4'},
+    { type: 'video' as const, src: '/HB 22.mp4'},
+    { type: 'video' as const, src: '/HB 10.mp4'},
   ] : [
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1605021154857-087cbc9ebd32?q=80&w=2069&auto=format&fit=crop' },
-    { type: 'video' as const, src: '/H B 5.mp4', poster: '/HB 23' }, // Replace with an actual image
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'video' as const, src: '/HB 28.mp4', poster: '/H B 5.jpg' }, // Again, use actual poster image
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'image' as const, src: 'https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?q=80&w=2070&auto=format&fit=crop' },
-  ];
+    { type: 'image' as const, src: '/Happy Birthday.jpeg' },
+    { type: 'video' as const, src: '/H B 5.mp4'}, 
+    { type: 'video' as const, src: '/HB 10.mp4'},
+    { type: 'video' as const, src: '/HB 28.mp4'},
+    { type: 'video' as const, src: '/H B 5.mp4'},// Replace with an actual image
+    { type: 'video' as const, src: '/HB 17.mp4'},
+    { type: 'video' as const, src: '/HB 22.mp4'},
+    { type: 'video' as const, src: '/ME.mp4'}, 
+    ];
   
   
   const mediaItems = photoUrl 
