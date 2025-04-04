@@ -34,7 +34,7 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
   }));
 
   return (
-    <motion.div 
+    <motion.div
       className={`min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden ${isDarkMode ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -46,12 +46,12 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
           <motion.div
             key={blob.id}
             className={`absolute rounded-full ${
-              blob.color === 'pink' 
-                ? 'bg-gradient-to-r from-pink-300 to-purple-300' 
-                : blob.color === 'purple' 
-                ? 'bg-gradient-to-r from-purple-300 to-indigo-300' 
-                : blob.color === 'blue' 
-                ? 'bg-gradient-to-r from-blue-300 to-cyan-300' 
+              blob.color === 'pink'
+                ? 'bg-gradient-to-r from-pink-300 to-purple-300'
+                : blob.color === 'purple'
+                ? 'bg-gradient-to-r from-purple-300 to-indigo-300'
+                : blob.color === 'blue'
+                ? 'bg-gradient-to-r from-blue-300 to-cyan-300'
                 : 'bg-gradient-to-r from-cyan-300 to-teal-300'
             } ${isDarkMode ? 'opacity-10' : 'opacity-20'}`}
             style={{
@@ -71,7 +71,7 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
               duration: blob.duration,
               repeat: 2,
               delay: blob.delay,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           />
         ))}
@@ -86,8 +86,8 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
             style={{
               top: `${meteor.y}%`,
               left: `${meteor.x}%`,
-              boxShadow: isDarkMode 
-                ? `0 0 10px 2px rgba(255,255,255,0.3)` 
+              boxShadow: isDarkMode
+                ? `0 0 10px 2px rgba(255,255,255,0.3)`
                 : `0 0 10px 2px rgba(0,0,0,0.2)`,
               willChange: 'transform, opacity',
             }}
@@ -102,7 +102,7 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
               duration: meteor.duration,
               repeat: 2,
               delay: meteor.delay,
-              ease: "linear"
+              ease: 'linear',
             }}
           />
         ))}
@@ -110,34 +110,37 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
 
       {/* Main Content */}
       <div className="z-10 text-center space-y-12 px-4 py-12 relative">
-
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.3, type: "spring", stiffness: 100 }}
+          transition={{ duration: 1.2, delay: 0.3, type: 'spring', stiffness: 100 }}
           className="space-y-6"
         >
-          <motion.div 
+          <motion.div
             className="flex justify-center gap-4"
             animate={{ y: [0, -10, 0], rotate: [0, 5, 0, -5, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           >
             <PartyPopper className="h-12 w-12 text-pink-500" />
             <Cake className="h-12 w-12 text-blue-500" />
             <Gift className="h-12 w-12 text-purple-500" />
           </motion.div>
 
-          <motion.div className="space-y-4" whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}>
-            <motion.h1 
+          <motion.div className="space-y-4" whileHover={{ scale: 1.05 }}>
+            <motion.h1
               className={`text-5xl md:text-7xl font-bold bg-clip-text text-transparent ${
-                isDarkMode 
-                  ? 'bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400' 
-                  : 'bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500'}`}
-              animate={{ color: ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF", "#FF6B6B"], transition: { duration: 3, repeat: Infinity } }}
+                isDarkMode
+                  ? 'bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400'
+                  : 'bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500'
+              }`}
+              animate={{
+                color: ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF6B6B'],
+                transition: { duration: 3, repeat: Infinity },
+              }}
             >
               My Wishes To You
             </motion.h1>
-            <motion.p 
+            <motion.p
               className={`text-xl md:text-2xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto birthday-message`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -148,7 +151,7 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
           </motion.div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="flex flex-col sm:flex-row gap-6 justify-center"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -168,21 +171,30 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
           </motion.div>
         </motion.div>
 
+        {/* Premium Developer Button */}
         <motion.div className="pt-12 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 1 }}>
           <div className="flex items-center justify-center gap-2">
-            <Button
-              variant="default"
-              size="sm"
+            <motion.button
               onClick={() => setShowDeveloperInfo(true)}
-              className="text-sm bg-white text-black dark:bg-gray-900 dark:text-white border dark:border-gray-700 border-gray-200 hover:scale-105 transition-all"
+              className={`relative overflow-hidden text-sm font-medium rounded-lg px-6 py-2 transition-all
+                ${isDarkMode
+                  ? 'bg-gradient-to-r from-pink-600 via-purple-700 to-indigo-800 text-white shadow-lg shadow-purple-500/20'
+                  : 'bg-gradient-to-r from-pink-200 via-purple-300 to-indigo-400 text-black shadow-md shadow-pink-200/40'}
+              `}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Developed by G.Thangella
-            </Button>
+              <span className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-20 blur-sm" />
+              <span className="relative z-10">Developed by G.Thangella</span>
+            </motion.button>
+
             <Button
               variant="outline"
               size="icon"
               className="rounded-full h-8 w-8 bg-white dark:bg-gray-900 border dark:border-gray-700 border-gray-200"
-              onClick={() => window.open('https://www.instagram.com/g_thangella_k?igsh=aWczdnVtaDR1N280', '_blank')}
+              onClick={() =>
+                window.open('https://www.instagram.com/g_thangella_k?igsh=aWczdnVtaDR1N280', '_blank')
+              }
             >
               <Instagram className={`h-4 w-4 ${isDarkMode ? 'text-pink-400' : 'text-pink-500'}`} />
             </Button>
@@ -190,17 +202,23 @@ export default function IntroPage({ onEnter, onAboutClick, isDarkMode, toggleDar
         </motion.div>
       </div>
 
-      {showDeveloperInfo && (
-        <DeveloperInfoCard onClose={() => setShowDeveloperInfo(false)} isDarkMode={isDarkMode} />
-      )}
+      {showDeveloperInfo && <DeveloperInfoCard onClose={() => setShowDeveloperInfo(false)} isDarkMode={isDarkMode} />}
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes shimmer {
-          100% { transform: translateX(100%); }
-        }
-        .animate-shimmer { animation: shimmer 2s infinite; }
-        .birthday-message { font-family: 'Dancing Script', cursive; }
-      `}} />
+      <style>
+        {`
+          @keyframes shimmer {
+            100% {
+              transform: translateX(100%);
+            }
+          }
+          .birthday-message {
+            font-family: 'Dancing Script', cursive;
+          }
+          .animate-shimmer {
+            animation: shimmer 2s infinite linear;
+          }
+        `}
+      </style>
     </motion.div>
   );
 }

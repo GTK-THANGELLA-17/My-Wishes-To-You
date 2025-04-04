@@ -330,33 +330,41 @@ The best is still ahead! Continue seeking new experiences and opportunities that
   };
 
   useEffect(() => {
-    // Initialize audio elements immediately to allow user interaction
-    if (musicRef.current) {
-      musicRef.current.load();
-    }
-    if (maleVoiceRef.current) {
-      maleVoiceRef.current.load();
-    }
-    if (femaleVoiceRef.current) {
-      femaleVoiceRef.current.load();
-    }
-
+    // Load audio on mount
+    musicRef.current?.load();
+    maleVoiceRef.current?.load();
+    femaleVoiceRef.current?.load();
+  
+    // Confetti
     createConfetti({
       particleCount: 200,
       spread: 90,
       origin: { x: 0.5, y: 0.5 }
     });
-
-    // Show components with animation delay
+  
     setTimeout(() => setIsMessageVisible(true), 1000);
     setTimeout(() => setIsAgeVisible(true), 3000);
-    
+  
     const confettiInterval = setInterval(() => {
       fireConfettiCannon(Math.random() > 0.5 ? 'left' : 'right');
     }, 8000);
-
-    return () => clearInterval(confettiInterval);
+  
+    // On page unload or refresh
+    const handleUnload = () => {
+      stopVoice(); // 💡 call the same stop function
+      musicRef.current?.pause();
+      musicRef.current && (musicRef.current.currentTime = 0);
+    };
+  
+    window.addEventListener("beforeunload", handleUnload);
+  
+    return () => {
+      clearInterval(confettiInterval);
+      window.removeEventListener("beforeunload", handleUnload);
+      handleUnload(); // 🧹 cleanup audio and voice playback on unmount
+    };
   }, []);
+  
   useEffect(() => {
     const music = musicRef.current;
     if (music) {
@@ -369,7 +377,7 @@ The best is still ahead! Continue seeking new experiences and opportunities that
         });
     }
   }, []);
-  
+
   const playMusic = () => {
     if (musicRef.current) {
       // Set audio context to running state first by user interaction
@@ -397,6 +405,25 @@ The best is still ahead! Continue seeking new experiences and opportunities that
       setMusicPlaying(false);
     }
   };
+ 
+  useEffect(() => {
+  const handleUnload = () => {
+    if (maleVoiceRef.current) {
+      maleVoiceRef.current.pause();
+      maleVoiceRef.current.currentTime = 0;
+    }
+    if (femaleVoiceRef.current) {
+      femaleVoiceRef.current.pause();
+      femaleVoiceRef.current.currentTime = 0;
+    }
+  };
+
+  window.addEventListener('beforeunload', handleUnload);
+
+  return () => {
+    window.removeEventListener('beforeunload', handleUnload);
+  };
+}, []);
 
   const playVoice = () => {
     const voiceRef = selectedVoice === 'male' ? maleVoiceRef : femaleVoiceRef;
