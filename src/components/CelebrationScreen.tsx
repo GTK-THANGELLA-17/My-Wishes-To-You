@@ -357,7 +357,19 @@ The best is still ahead! Continue seeking new experiences and opportunities that
 
     return () => clearInterval(confettiInterval);
   }, []);
-
+  useEffect(() => {
+    const music = musicRef.current;
+    if (music) {
+      music
+        .play()
+        .then(() => setMusicPlaying(true))
+        .catch((err) => {
+          console.warn('Autoplay failed, user interaction may be required:', err);
+          setMusicPlaying(false);
+        });
+    }
+  }, []);
+  
   const playMusic = () => {
     if (musicRef.current) {
       // Set audio context to running state first by user interaction
@@ -1301,15 +1313,16 @@ The best is still ahead! Continue seeking new experiences and opportunities that
         </motion.div>
         
         <div className="pt-8 text-center">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setShowDeveloperInfo(true)}
-            className="text-xs opacity-70 hover:opacity-100 transition-opacity dark:text-gray-300"
-          >
-            Developed by G.Thangella
-          </Button>
-        </div>
+  <Button
+    variant="ghost"
+    size="sm"
+    onClick={() => setShowDeveloperInfo(true)}
+    className="text-xs opacity-70 hover:opacity-100 transition-opacity text-gray-600 dark:text-white"
+  >
+    Developed by G.Thangella
+  </Button>
+</div>
+
 
         {showDeveloperInfo && (
           <DeveloperInfoCard onClose={() => setShowDeveloperInfo(false)} isDarkMode={isDarkMode} />
