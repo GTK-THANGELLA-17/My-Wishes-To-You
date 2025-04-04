@@ -11,6 +11,7 @@ import { Cake, Gift, PartyPopper, Sparkles, Stars, Moon, Sun } from 'lucide-reac
 import IntroPage from '@/components/IntroPage';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { Home } from 'lucide-react';
 
 type AppState = 'intro' | 'input' | 'video' | 'celebration';
 export type ColorTheme = 'blue' | 'pink' | 'purple' | 'green' | 'orange';
@@ -261,9 +262,11 @@ export default function Index() {
                 About My Wishes To You
               </h2>
               <p className={`mb-4 ${isDarkMode ? 'text-gray-300' : ''}`}>
-                This interactive birthday celebration app helps you create personalized birthday experiences.
-                Celebrate special moments with customized birthday messages, age milestones, and beautiful animations.
-              </p>
+  Welcome to <strong>My Wishes To You</strong> – an interactive birthday celebration website where heartfelt wishes come to life in the most personalized way.
+  Enter the birthday person's details to instantly generate a unique, customized greeting featuring their name, age, and gender.
+  Add a photo, choose color themes, listen to voice wishes, and enjoy beautiful animations. Share your special wishes on social media and make birthdays truly unforgettable.
+</p>
+
               <p className={`mb-4 ${isDarkMode ? 'text-gray-300' : ''}`}>
                 You can personalize the experience based on gender, choose different color themes,
                 and even add a photo of the birthday person to make it more special.
@@ -414,17 +417,18 @@ export default function Index() {
       </div>
 
       {appState !== 'intro' && (
-        <div className="absolute top-4 left-4 z-10">
-          <Button 
-            onClick={handleReturnHome} 
-            variant="outline" 
-            size="sm" 
-            className="flex items-center gap-1 bg-white dark:bg-gray-900 text-black dark:text-white border dark:border-gray-700 shadow-md button-edge-effect"
-          >
-            <span>Return Home</span>
-          </Button>
-        </div>
-      )}
+  <div className="absolute top-4 left-4 z-10">
+    <Button 
+      onClick={handleReturnHome} 
+      variant="outline" 
+      size="sm" 
+      className="bg-white dark:bg-gray-900 text-black dark:text-white border dark:border-gray-700 shadow-md button-edge-effect"
+    >
+      <Home className="h-4 w-4" />
+    </Button>
+  </div>
+)}
+
 
       <AnimatePresence mode="wait">
         {appState === 'intro' && (
@@ -445,41 +449,41 @@ export default function Index() {
           </motion.div>
         )}
 
-        {appState === 'input' && (
-          <motion.div
-            key="input"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-4xl flex flex-col items-center justify-center"
-          >
-            <BirthdayInput 
-              onCelebrate={handleCelebrate} 
-              colorTheme={colorTheme} 
-              isDarkMode={isDarkMode}
-              toggleDarkMode={toggleDarkMode}
-            />
-          </motion.div>
-        )}
+{appState === 'input' && (
+  <motion.div
+    key="input"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.5 }}
+    className="w-full max-w-4xl flex flex-col items-center justify-center"
+  >
+    <BirthdayInput 
+      onCelebrate={handleCelebrate} 
+      colorTheme={colorTheme} 
+      isDarkMode={isDarkMode}
+      toggleDarkMode={toggleDarkMode} // ✅ This is now valid
+    />
+  </motion.div>
+)}
 
-        {appState === 'video' && userData && (
-          <motion.div
-            key="video"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="w-full"
-          >
-            <IntroVideo 
-              onComplete={handleIntroComplete} 
-              videoSrc="https://media.bensound.com/bensound-video.mp4"
-              colorTheme={colorTheme}
-              gender={userData.gender}
-            />
-          </motion.div>
-        )}
+{appState === 'video' && userData && (
+  <motion.div
+    key="video"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    className="w-full"
+  >
+    <IntroVideo 
+      onComplete={handleIntroComplete} 
+      videoSrc="https://media.bensound.com/bensound-video.mp4"
+      colorTheme={colorTheme}
+      gender={userData.gender}
+    />
+  </motion.div>
+)}
 
         {appState === 'celebration' && userData && (
           <motion.div

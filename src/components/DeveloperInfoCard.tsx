@@ -77,7 +77,7 @@ export default function DeveloperInfoCard({ onClose, isDarkMode }: DeveloperInfo
                     >
                       <div className="w-full h-full rounded-full overflow-hidden preserve-3d" style={{ transform: 'translateZ(10px)' }}>
                         <img 
-                          src="\public\Profile Pic.jpg" 
+                          src="/public/Profile Pic.jpg" 
                           alt="G.Thangella" 
                           className="w-full h-full object-cover"
                         />

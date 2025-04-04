@@ -80,22 +80,22 @@ export default function CelebrationScreen({
   const ageCardRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-  // Include both image and video media for carousel
   const defaultMediaItems = gender === 'female' ? [
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1557992260-ec58e38d363c?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'video' as const, src: '\public\H B 5.mp4', poster: 'https://images.unsplash.com/photo-1585399099129-bc9a43dfc250?q=80&w=2070&auto=format&fit=crop' },
+    { type: 'video' as const, src: '/H B 5.mp4', poster: '/HB 23' },
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1585399099129-bc9a43dfc250?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'video' as const, src: 'https://media.bensound.com/bensound-birthdayvideo2.mp4', poster: 'https://images.unsplash.com/photo-1616461046183-f01aa1fe8bc4?q=80&w=2070&auto=format&fit=crop' },
+    { type: 'video' as const, src: '/HB 28.mp4', poster: '/H B 5.jpg'},
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1616461046183-f01aa1fe8bc4?q=80&w=2070&auto=format&fit=crop' },
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=2070&auto=format&fit=crop' },
   ] : [
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1605021154857-087cbc9ebd32?q=80&w=2069&auto=format&fit=crop' },
-    { type: 'video' as const, src: "/H B 5.mp4", poster: "/HB 23.mp4" },
+    { type: 'video' as const, src: '/H B 5.mp4', poster: '/HB 23' }, // Replace with an actual image
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop' },
-    { type: 'video' as const, src: "/HB 28.mp4", poster: "/H B 5.mp4" },
+    { type: 'video' as const, src: '/HB 28.mp4', poster: '/H B 5.jpg' }, // Again, use actual poster image
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=2070&auto=format&fit=crop' },
     { type: 'image' as const, src: 'https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?q=80&w=2070&auto=format&fit=crop' },
   ];
+  
   
   const mediaItems = photoUrl 
     ? [{ type: 'image' as const, src: photoUrl, alt: `Photo of ${name}` }, ...defaultMediaItems]
@@ -1204,31 +1204,31 @@ The best is still ahead! Continue seeking new experiences and opportunities that
           className="flex flex-wrap gap-4 justify-center"
         >
           {musicPlaying ? (
-            <Button 
-              variant="outline" 
-              className="button-hover-effect flex gap-2 items-center relative overflow-hidden group dark:bg-gray-800 dark:text-white" 
-              onClick={stopMusic}
-            >
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-              <VolumeX className="h-5 w-5" />
-              Stop Music
-            </Button>
-          ) : (
-            <Button 
-              variant="outline" 
-              className="button-hover-effect flex gap-2 items-center relative overflow-hidden group dark:bg-gray-800 dark:text-white" 
-              onClick={playMusic}
-            >
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-              <Music className="h-5 w-5" />
-              Play Music
-            </Button>
-          )}
-        </motion.div>
+        <Button 
+          variant="outline" 
+          className="button-hover-effect flex gap-2 items-center relative overflow-hidden group dark:bg-gray-800 dark:text-white" 
+          onClick={stopMusic}
+        >
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          />
+          <VolumeX className="h-5 w-5" />
+          Stop Music
+        </Button>
+      ) : (
+        <Button 
+          variant="outline" 
+          className="button-hover-effect flex gap-2 items-center relative overflow-hidden group dark:bg-gray-800 dark:text-white" 
+          onClick={playMusic}
+        >
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          />
+          <Music className="h-5 w-5" />
+          Play Music
+        </Button>
+      )}
+    </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -1256,7 +1256,7 @@ The best is still ahead! Continue seeking new experiences and opportunities that
               variant="ghost" 
               className="rounded-full h-12 w-12 button-hover-effect relative overflow-hidden group"
               onClick={() => {
-                window.open('https://www.instagram.com/')
+                window.open('https://www.instagram.com/g_thangella_k?igsh=aWczdnVtaDR1N280')
               }}
             >
               <motion.div 
@@ -1313,7 +1313,7 @@ The best is still ahead! Continue seeking new experiences and opportunities that
 
       <audio 
         ref={musicRef} 
-        src="https://media.bensound.com/bensound-happybirthday.mp3" 
+        src="/HB MUSIC 2.mp3" 
         preload="auto"
         loop
       />

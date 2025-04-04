@@ -13,15 +13,18 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ onComplete, colorTheme, gender 
   const [isPlaying, setIsPlaying] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [transformStyle, setTransformStyle] = useState({});
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    const audio = audioRef.current;
+    if (!video || !audio) return;
 
-    const playVideo = async () => {
+    const playMedia = async () => {
       try {
         await video.play();
+        await audio.play();
         setIsPlaying(true);
       } catch (err) {
         console.warn("Autoplay failed:", err);
@@ -29,10 +32,14 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ onComplete, colorTheme, gender 
       }
     };
 
-    const handleEnded = () => onComplete();
+    const handleEnded = () => {
+      audio.pause();
+      audio.currentTime = 0;
+      onComplete();
+    };
 
     video.addEventListener('ended', handleEnded);
-    playVideo();
+    playMedia();
 
     return () => {
       video.removeEventListener('ended', handleEnded);
@@ -41,17 +48,25 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ onComplete, colorTheme, gender 
 
   const handlePlayPause = () => {
     const video = videoRef.current;
-    if (!video) return;
+    const audio = audioRef.current;
+    if (!video || !audio) return;
 
     if (isPlaying) {
       video.pause();
+      audio.pause();
     } else {
       video.play();
+      audio.play();
     }
     setIsPlaying(!isPlaying);
   };
 
   const handleSkip = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
     onComplete();
   };
 
@@ -83,7 +98,7 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ onComplete, colorTheme, gender 
         style={{
           perspective: '1000px',
           transformStyle: 'preserve-3d',
-          backgroundColor: '#0f0f0f', // dark background always
+          backgroundColor: '#0f0f0f',
           color: 'white',
           ...transformStyle,
         }}
@@ -95,11 +110,19 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ onComplete, colorTheme, gender 
           <video
             ref={videoRef}
             className="w-full h-full object-cover"
-            src="/CD 1.mp4"
+            src="/CD%201.mp4"
             muted
             playsInline
             autoPlay
           />
+
+          {/* Audio Player (Hidden) */}
+          <audio
+            ref={audioRef}
+            src="\Bg music.mp3" // ✅ Add your audio file to public directory
+            preload="auto"
+          />
+
           {/* Play/Pause Button */}
           <div className="absolute bottom-4 left-4 z-10">
             <Button
@@ -117,7 +140,10 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ onComplete, colorTheme, gender 
           <h2 className="text-xl font-semibold text-white">
             {gender === 'male' || gender === 'female' ? 'Your' : 'Your'} Birthday Celebration
           </h2>
-          <Button variant="outline" onClick={handleSkip} className="text-white border-white hover:bg-white/10">
+          <Button
+            onClick={handleSkip}
+            className="bg-white text-black dark:bg-black dark:text-white border border-gray-300 dark:border-gray-600 hover:opacity-90 transition"
+          >
             <SkipForward className="mr-2 h-4 w-4" />
             Skip Intro
           </Button>
